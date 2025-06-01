@@ -10,7 +10,7 @@ const Head = styled('div')({
     padding: '10px',
 });
 
-const LibraryHead = () => {
+export const LibHead = () => {
     const handleCreatePlaylist = () => {
         //나중에 추가
     };
@@ -29,4 +29,3 @@ const LibraryHead = () => {
         </Head>
     );
 };
-export default LibraryHead;

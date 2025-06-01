@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 import * as S from './AppLayout.styled';
 import NavBox from './components/NavBox';
 import { Library } from './components/Library';
-import LibraryHead from './components/LibraryHead';
+import { LibHead } from './components/LibHead';
 
 function AppLayout() {
     return (
@@ -14,7 +14,7 @@ function AppLayout() {
                         <NavBox />
                     </S.ContentBox>
                     <S.ContentBox sx={{ height: '100%' }}>
-                        <LibraryHead />
+                        <LibHead />
                         <Library />
                     </S.ContentBox>
                 </S.Sidebar>
