@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router';
 import * as S from './AppLayout.styled';
-import LibraryHead from './components/LIbraryHead';
 import NavBox from './components/NavBox';
 import { Library } from './components/Library';
+import LibraryHead from './components/LibraryHead';
 
 function AppLayout() {
     return (
