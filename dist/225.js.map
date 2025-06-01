@@ -1,1 +1,0 @@
-{"version":3,"file":"225.js?ver=879378a06ab12dbc1fac","mappings":"uJAIA,QAJA,WACI,OAAOA,EAAAA,EAAAA,KAAA,OAAAC,SAAK,OAChB,C","sources":["webpack://spotify-demo/./src/pages/Not/Not.tsx"],"sourcesContent":["function Not() {\r\n    return <div>Not</div>;\r\n}\r\n\r\nexport default Not;\r\n"],"names":["_jsx","children"],"sourceRoot":""}

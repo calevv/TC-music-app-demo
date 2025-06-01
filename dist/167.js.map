@@ -1,1 +1,0 @@
-{"version":3,"file":"167.js?ver=f834387bf4ae6cc74f18","mappings":"sJAIA,QAJA,WACI,OAAOA,EAAAA,EAAAA,KAAA,OAAAC,SAAK,UAChB,C","sources":["webpack://spotify-demo/./src/pages/Search/Search.tsx"],"sourcesContent":["function Search() {\r\n    return <div>Search</div>;\r\n}\r\n\r\nexport default Search;\r\n"],"names":["_jsx","children"],"sourceRoot":""}
