@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkspotify_demo=self.webpackChunkspotify_demo||[]).push([[163],{7163:(e,s,d)=>{d.r(s),d.d(s,{default:()=>t});var i=d(9494),n=(d(6540),d(4848));const r=()=>(0,n.jsx)("div",{children:(0,n.jsx)(i.A,{variant:"h1",paddingTop:"10px",children:"New Released Albums"})}),t=function(){return(0,n.jsx)("div",{children:(0,n.jsx)(r,{})})}}}]);
+//# sourceMappingURL=163.js.map?ver=f791cbb0e5416537abbc
