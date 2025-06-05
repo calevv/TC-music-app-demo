@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkspotify_demo=self.webpackChunkspotify_demo||[]).push([[167],{167:(e,s,t)=>{t.r(s),t.d(s,{default:()=>n});var c=t(4848);const n=function(){return(0,c.jsx)("div",{children:"Search"})}}}]);
-//# sourceMappingURL=167.js.map?ver=f834387bf4ae6cc74f18
