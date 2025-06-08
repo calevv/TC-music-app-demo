@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useAuthStore } from '../../stores/useAuthStore'; // 경로는 실제에 맞게 수정
+import { useAuthStore } from '../../stores/useAuthStore';
 import LoginButton from '../../common/components/LoginButton';
 import useGetCurrentUsersProfile from '../../hooks/useGetCurrentUsersProfile';
 import { Avatar, Box, IconButton, Menu, MenuItem, styled } from '@mui/material';

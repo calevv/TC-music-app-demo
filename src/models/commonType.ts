@@ -21,3 +21,12 @@ export interface Followers {
     href: string | null;
     total: number;
 }
+
+export interface Owner {
+    external_urls?: ExternalUrls;
+    href?: string;
+    id?: string;
+    type?: string;
+    uri?: string;
+    display_name?: string | null;
+}

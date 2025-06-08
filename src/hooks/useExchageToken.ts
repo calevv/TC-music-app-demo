@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAuthStore } from '../stores/useAuthStore'; // 경로는 실제에 맞게 수정
+import { useAuthStore } from '../stores/useAuthStore';
 import { exchageToken } from '../apis/authApi';
 import { ExchangeTokenResponse } from '../models/auth';
 
