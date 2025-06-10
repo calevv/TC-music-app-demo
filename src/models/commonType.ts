@@ -1,37 +1,37 @@
 export interface ExternalUrls {
-    spotify: string;
+  spotify: string;
 }
 
 export interface Image {
-    url: string;
-    height: number | null;
-    width: number | null;
+  url: string;
+  height: number | null;
+  width: number | null;
 }
 
 export interface Restriction {
-    reason?: string;
+  reason?: string;
 }
 
 export interface ExplictContent {
-    filter_enabled: boolean;
-    filter_locked: boolean;
+  filter_enabled: boolean;
+  filter_locked: boolean;
 }
 
 export interface Followers {
-    href: string | null;
-    total: number;
+  href: string | null;
+  total: number;
 }
 
 export interface Owner {
-    external_urls?: ExternalUrls;
-    href?: string;
-    id?: string;
-    type?: string;
-    uri?: string;
-    display_name?: string | null;
+  external_urls?: ExternalUrls;
+  href?: string;
+  id?: string;
+  type?: "user";
+  uri?: string;
+  display_name?: string | null;
 }
 
 export interface items {
-    href?: string;
-    total?: number;
+  href?: string;
+  total?: number;
 }
