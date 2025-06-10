@@ -77,7 +77,8 @@ const PlaylistDetail = () => {
   } = useGetPlaylistItem({
     playlist_id: id,
     limit: PAGE_LIMIT,
-    offset: 0,
+    // offset: 0,
+    // 아이템 개수만 스크롤하고자 주석처리
   });
   const [ref, inView] = useInView();
   useEffect(() => {
