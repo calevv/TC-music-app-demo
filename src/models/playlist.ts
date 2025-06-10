@@ -125,3 +125,11 @@ export type GetPlaylistItemdRequest = GetCurrentUserPlaylistRequest &
   GetPlaylistRequest;
 
 export type GetPlaylistItemdResponse = ApiResponse<PlaylistTrack>;
+
+// createPlaylist params
+export interface CreatePlaylistRequest {
+  name: string;
+  playlistPublic?: boolean;
+  collaborative?: boolean;
+  description?: string;
+}

@@ -86,6 +86,7 @@ const PlaylistDetail = () => {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   return (
     <StyledTableContainer>
       <PlaylistHeader container spacing={7}>
