@@ -1,11 +1,13 @@
 import {
   Avatar,
+  Box,
   ListItemAvatar,
   ListItemButton,
   ListItemText,
   styled,
   Typography,
 } from "@mui/material";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
 const PlayListItemContainer = styled(ListItemButton)(({ theme, selected }) => ({
   padding: "8px",
@@ -20,6 +22,16 @@ const PlaylistAvatar = styled(Avatar)({
   width: "48px",
   height: "48px",
   borderRadius: "8px",
+});
+const PlaylistNoImage = styled(Box)({
+  width: "48px",
+  height: "48px",
+  borderRadius: "8px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "black",
+  boxSizing: "border-box",
 });
 const PlaylistName = styled(Typography)({
   fontWeight: "bold",
@@ -51,7 +63,9 @@ const PlaylistItem = ({
         {image ? (
           <PlaylistAvatar src={image} alt={name} />
         ) : (
-          <Typography variant="caption">No image</Typography>
+          <PlaylistNoImage>
+            <MusicNoteIcon />
+          </PlaylistNoImage>
         )}
       </ListItemAvatar>
       <ListItemText
