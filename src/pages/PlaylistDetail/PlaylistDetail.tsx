@@ -20,6 +20,8 @@ import { PAGE_LIMIT } from "../../configs/commonConfig";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import LoadingSpinner from "../../common/components/LoadingSpinner";
+import { useAuthStore } from "../../stores/useAuthStore";
+import LoginButton from "../../common/components/LoginButton";
 
 const PlaylistHeader = styled(Grid)({
   display: "flex",
@@ -65,28 +67,86 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 }));
 const PlaylistDetail = () => {
   const { id } = useParams<{ id: string }>();
-  if (id === undefined) {
-    return <Navigate to="/" />;
-  }
-  const { data: playlist } = useGetPlaylist({ playlist_id: id });
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const isInvalid = !isAuthenticated || !id;
+
+  const {
+    data: playlist,
+    isLoading: isPlaylistLoading,
+    isError: isPlaylistError,
+  } = useGetPlaylist({ playlist_id: id ?? "" });
   const {
     data: playlistDetail,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isLoading: isPlaylistItemLoading,
+    isError: isPlaylistItemError,
   } = useGetPlaylistItem({
-    playlist_id: id,
+    playlist_id: id ?? "",
     limit: PAGE_LIMIT,
-    // offset: 0,
-    // 아이템 개수만 스크롤하고자 주석처리
   });
+
   const [ref, inView] = useInView();
+
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  if (isInvalid) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="100%"
+        flexDirection="column"
+      >
+        <Typography variant="h2" fontWeight={700} mb="20px">
+          다시 로그인 하세요
+        </Typography>
+        <LoginButton />
+      </Box>
+    );
+  }
+  // 플레이리스트 정보 로딩 중
+  if (isPlaylistLoading) {
+    return <LoadingSpinner />;
+  }
+
+  // 플레이리스트 정보 로딩 에러
+  if (isPlaylistError) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+      >
+        <Typography variant="h5" color="error">
+          플레이리스트 정보를 불러오는데 실패했습니다.
+        </Typography>
+      </Box>
+    );
+  }
+  // 플레이리스트 아이템 로딩 에러
+  if (isPlaylistItemError) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+      >
+        <Typography variant="h5" color="error">
+          플레이리스트 곡들을 불러오는데 실패했습니다.
+        </Typography>
+      </Box>
+    );
+  }
   return (
     <StyledTableContainer>
       <PlaylistHeader container spacing={7}>

@@ -3,6 +3,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import AddIcon from "@mui/icons-material/Add";
 import React from "react";
 import useCreatePlaylist from "../../hooks/useCreatePlaylist";
+import { getSpotifyAuthUrl } from "../../utils/auth";
+import useGetCurrentUsersProfile from "../../hooks/useGetCurrentUsersProfile";
 
 const Head = styled("div")({
   display: "flex",
@@ -13,8 +15,13 @@ const Head = styled("div")({
 
 export const LibHead = () => {
   const { mutate: createPlaylist } = useCreatePlaylist();
+  const { data: userProfile } = useGetCurrentUsersProfile();
   const handleCreatePlaylist = () => {
-    createPlaylist({ name: "music list" });
+    if (userProfile) {
+      createPlaylist({ name: "music list" });
+    } else {
+      getSpotifyAuthUrl();
+    }
   };
 
   return (
@@ -31,3 +38,6 @@ export const LibHead = () => {
     </Head>
   );
 };
+function useGetCurrentUserProfile(): { data: any } {
+  throw new Error("Function not implemented.");
+}
