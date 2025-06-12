@@ -22,6 +22,7 @@ import { useEffect } from "react";
 import LoadingSpinner from "../../common/components/LoadingSpinner";
 import { useAuthStore } from "../../stores/useAuthStore";
 import LoginButton from "../../common/components/LoginButton";
+import EmptyPlaylistWithSearch from "./components/EmptyPlaylistWithSearch";
 
 const PlaylistHeader = styled(Grid)({
   display: "flex",
@@ -191,7 +192,7 @@ const PlaylistDetail = () => {
         </Grid>
       </PlaylistHeader>
       {playlist?.tracks?.total === 0 ? (
-        <Typography>search</Typography>
+        <EmptyPlaylistWithSearch />
       ) : (
         <Table>
           <TableHead>
