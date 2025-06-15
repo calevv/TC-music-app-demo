@@ -23,6 +23,7 @@ import LoadingSpinner from '../../common/components/LoadingSpinner';
 import { useAuthStore } from '../../stores/useAuthStore';
 import LoginButton from '../../common/components/LoginButton';
 import EmptyPlaylistWithSearch from './components/EmptyPlaylistWithSearch';
+import { usePlaylistStore } from '../../stores/usePlaylistStore';
 
 const PlaylistHeader = styled(Grid)({
     display: 'flex',
@@ -70,7 +71,22 @@ const PlaylistDetail = () => {
     const { id } = useParams<{ id: string }>();
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+    // ✨ Zustnad 스토어에서 setPlaylistId 액션을 가져옵니다.
+    const setPlaylistId = usePlaylistStore((state) => state.setPlaylistId);
+
+    // id가 유효하지 않거나 인증되지 않은 경우
     const isInvalid = !isAuthenticated || !id;
+
+    // ✨ id가 변경될 때마다 Zustnad 스토어에 저장합니다.
+    useEffect(() => {
+        // id가 유효할 때만 저장
+        if (id) {
+            setPlaylistId(id);
+        } else {
+            // id가 없을 경우, 스토어의 playlistId를 초기화할 수도 있습니다.
+            setPlaylistId(null);
+        }
+    }, [id, setPlaylistId]); // id와 setPlaylistId가 변경될 때마다 이 훅을 실행합니다.
 
     const {
         data: playlist,
