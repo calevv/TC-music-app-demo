@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
+import SearchPageBar from '../common/components/SearchPageBar';
 
 const AppLayout = React.lazy(() => import('./../layout/AppLayout'));
 const Home = React.lazy(() => import('../pages/Home/Home'));
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
             { index: true, Component: Home },
             {
                 path: 'search',
+                element: <SearchPageBar />,
                 children: [
                     { index: true, Component: Search },
                     { path: ':keyword', Component: SearchWithKeyword },
