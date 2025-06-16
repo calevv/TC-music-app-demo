@@ -14,7 +14,7 @@ const ArtistBox = (artists: ResultBoxProps) => {
       {artist?.items.slice(0, 6).map((item) => {
         const imageUrl = item.images?.[0]?.url || "";
         return (
-          <Grid size={{ xs: 6, sm: 4, md: 2 }} key={item.id}>
+          <Grid spacing={5} size={{ xs: 6, sm: 4, md: 2 }} key={item.id}>
             <ArtistCard
               name={item.name}
               image={imageUrl}

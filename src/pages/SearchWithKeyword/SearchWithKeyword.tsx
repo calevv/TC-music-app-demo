@@ -8,6 +8,7 @@ import {
   Alert,
   Box,
   Grid,
+  Snackbar,
   SnackbarCloseReason,
   Typography,
 } from "@mui/material";
@@ -44,15 +45,15 @@ const SearchWithKeyword = () => {
       setTopResult(null);
     }
   }, [results]);
-  // const handleClose = (
-  //   event: Event | SyntheticEvent<Element, Event>,
-  //   reason: SnackbarCloseReason
-  // ) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpen(false);
-  // };
+  const handleClose = (
+    event: Event | SyntheticEvent<Element, Event>,
+    reason: SnackbarCloseReason
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   if (error) {
     return <ErrorMessage errorMessage={error.message} />;
   }
@@ -73,7 +74,7 @@ const SearchWithKeyword = () => {
   // console.log("results.albums", results.albums);
   return (
     <Grid container direction="column" spacing={2} sx={{ marginTop: "20px" }}>
-      <Grid container spacing={5}>
+      <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4">Top result</Typography>
           {results.tracks?.items.length !== 0 && (
@@ -83,18 +84,32 @@ const SearchWithKeyword = () => {
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4">Songs</Typography>
           {results.tracks?.items.length !== 0 && (
-            <SongListBox tracks={results?.tracks} />
+            <SongListBox
+              tracks={results?.tracks}
+              setOpen={setOpen}
+              setMessage={setMessage}
+            />
           )}
         </Grid>
       </Grid>
-      <Grid>
+      <Grid container>
         <Typography variant="h4">Artist</Typography>
         <ArtistBox artists={results?.artists} />
       </Grid>
-      <Grid>
+      <Grid container>
         <Typography variant="h4">Album</Typography>
         <AlbumBox albums={results?.albums} />
       </Grid>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={message}
+      />
     </Grid>
   );
 };
