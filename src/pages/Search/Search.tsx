@@ -9,7 +9,7 @@ const Search = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  console.log("datadata", data);
+
   const SearchContainer = styled(Box)(({ theme }) => ({
     padding: "40px 20px",
     boxSizing: "border-box",
@@ -70,6 +70,10 @@ const Search = () => {
 
   return (
     <SearchContainer>
+      <Typography variant="h3" sx={{ marginBottom: "20px", mx: "10px" }}>
+        All Browse
+      </Typography>
+
       {categories && categories.items.length > 0 ? (
         <Grid container spacing={2}>
           {categories.items.map((item) => {

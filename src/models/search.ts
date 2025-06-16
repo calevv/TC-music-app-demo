@@ -1,6 +1,6 @@
 import { SimplifiedAlbum } from "./album";
 import { ApiResponse } from "./apiResponse";
-import { Artist } from "./artist";
+import { ArtistObject } from "./artist";
 import {
   Show,
   SimplifiedAudiobook,
@@ -30,7 +30,7 @@ export interface SearchRequestParams {
 
 export interface SearchResponse {
   tracks?: ApiResponse<TrackObject>;
-  artists?: ApiResponse<Artist>;
+  artists?: ApiResponse<ArtistObject>;
   albums?: ApiResponse<SimplifiedAlbum>;
   playlists?: ApiResponse<SimplifiedPlaylist>;
   show?: ApiResponse<Show>;
