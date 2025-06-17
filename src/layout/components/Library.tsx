@@ -7,6 +7,7 @@ import { styled } from "@mui/material";
 import useGetCurrentUsersProfile from "../../hooks/useGetCurrentUsersProfile";
 import { useInView } from "react-intersection-observer";
 import PlayList from "./PlayList";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 const PlaylistContainer = styled("div")(({ theme }) => ({
   overflowY: "auto",
@@ -24,10 +25,9 @@ const PlaylistContainer = styled("div")(({ theme }) => ({
 
 const Library = () => {
   const { ref, inView } = useInView();
-
+  const { isAuthenticated } = useAuthStore();
   const { data: user, isLoading: isUserLoading } = useGetCurrentUsersProfile();
 
-  // user 데이터가 있을 때만 useGetCurrentUserPlaylist 훅을 실행하도록 enabled 옵션 추가
   const {
     data: playlistData,
     isLoading: isPlaylistLoading,
@@ -40,48 +40,38 @@ const Library = () => {
     offset: 0,
     enabled: !!user,
   });
+
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
-  if (isUserLoading) {
-    return <LoadingSpinner />;
-  }
 
-  if (!user) {
-    return <EmptyPlaylist />;
-  }
-
-  if (isPlaylistLoading) {
+  if (isUserLoading || isPlaylistLoading) {
     return <LoadingSpinner />;
   }
 
   if (playlistError) {
-    // 여기서 발생하는 에러는 로그인 후 플레이리스트를 가져오다가 발생한 에러입니다.
+    // 여기서 발생하는 에러는 로그인 후 플레이리스트를 가져오다가 발생한 에러
     return <ErrorMessage errorMessage={playlistError.message} />;
   }
 
-  // data?.pages[0].total === 0 대신 data?.pages.every(page => page.items.length === 0)
-  // 또는 data?.pages.length === 0 && data.pages[0].items.length === 0 (만약 pages가 빈 배열일 수 있다면)
   const hasPlaylists =
     playlistData &&
     playlistData.pages &&
     playlistData.pages.some((page) => page.items.length > 0);
 
+  if (!isAuthenticated || !user || !hasPlaylists) {
+    return <EmptyPlaylist />;
+  }
+
   return (
-    <div>
-      {!hasPlaylists ? (
-        <EmptyPlaylist />
-      ) : (
-        <PlaylistContainer>
-          {playlistData?.pages.map((page, index) => (
-            <PlayList playlists={page.items} key={index} />
-          ))}
-          <div ref={ref}>{isFetchingNextPage && <LoadingSpinner />}</div>
-        </PlaylistContainer>
-      )}
-    </div>
+    <PlaylistContainer>
+      {playlistData?.pages.map((page, index) => (
+        <PlayList playlists={page.items} key={index} />
+      ))}
+      <div ref={ref}>{isFetchingNextPage && <LoadingSpinner />}</div>
+    </PlaylistContainer>
   );
 };
 
