@@ -19,7 +19,7 @@ const PlaylistContainer = styled("div")(({ theme }) => ({
     scrollbarWidth: "none", // Firefox
   },
   [theme.breakpoints.down("sm")]: {
-    maxHeight: "calc(100vh - 65px - 119px)",
+    maxHeight: "calc(100vh - 65px - 170px)",
   },
 }));
 
@@ -53,7 +53,8 @@ const Library = () => {
 
   if (playlistError) {
     // 여기서 발생하는 에러는 로그인 후 플레이리스트를 가져오다가 발생한 에러
-    return <ErrorMessage errorMessage={playlistError.message} />;
+    // return <ErrorMessage errorMessage={playlistError.message} />;
+    return <EmptyPlaylist />;
   }
 
   const hasPlaylists =
