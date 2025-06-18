@@ -3,11 +3,12 @@ import { EmptyPlaylist } from "./EmptyPlaylist";
 import useGetCurrentUserPlaylist from "../../hooks/useGetCurrentUserPlaylist";
 import LoadingSpinner from "../../common/components/LoadingSpinner";
 import ErrorMessage from "../../common/components/ErrorMessage";
-import { styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import useGetCurrentUsersProfile from "../../hooks/useGetCurrentUsersProfile";
 import { useInView } from "react-intersection-observer";
 import PlayList from "./PlayList";
 import { useAuthStore } from "../../stores/useAuthStore";
+import { HashLoader } from "react-spinners";
 
 const PlaylistContainer = styled("div")(({ theme }) => ({
   overflowY: "auto",
@@ -72,7 +73,19 @@ const Library = () => {
       {playlistData?.pages.map((page, index) => (
         <PlayList playlists={page.items} key={index} />
       ))}
-      <div ref={ref}>{isFetchingNextPage && <LoadingSpinner />}</div>
+      <div ref={ref}>
+        {isFetchingNextPage && (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "20px auto",
+            }}
+          >
+            <HashLoader color="#1ed760" size={30} speedMultiplier={1} />
+          </Box>
+        )}
+      </div>
     </PlaylistContainer>
   );
 };

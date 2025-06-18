@@ -35,7 +35,11 @@ const SearchPageBar = () => {
         overflow: "hidden",
       }}
     >
-      <SearchInput value={keyword} onChange={handleSearchKeyword} />
+      <SearchInput
+        value={keyword}
+        setKeyword={setKeyword}
+        onChange={handleSearchKeyword}
+      />
       <Box
         sx={{
           flex: 1,

@@ -12,7 +12,9 @@ const ArtistBox = (artists: ResultBoxProps) => {
   return (
     <Grid container spacing={2}>
       {artist?.items.slice(0, 6).map((item) => {
-        const imageUrl = item.images?.[0]?.url || "";
+        const imageUrl =
+          item.images?.[0]?.url ||
+          "https://placehold.co/1000x1000/000000/FFF?text=no+image";
         return (
           <Grid spacing={5} size={{ xs: 6, sm: 4, md: 2 }} key={item.id}>
             <ArtistCard

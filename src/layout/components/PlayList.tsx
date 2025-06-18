@@ -14,6 +14,7 @@ const PlayList = ({ playlists }: PlaylistProps) => {
     setSelectedId(id);
     navigate(`/playlist/${id}`);
   };
+
   return (
     <div>
       {playlists.map((item) => (

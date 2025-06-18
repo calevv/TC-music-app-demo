@@ -47,7 +47,13 @@ const Card = ({ name, image, artistName }: CardProps) => {
   return (
     <CardContainer>
       <div style={{ position: "relative" }}>
-        <AlbumImage src={image} />
+        <AlbumImage
+          src={
+            image
+              ? image
+              : "https://placehold.co/1000x1000/000000/FFF?text=no+image"
+          }
+        />
         <Overlay className="overlay">
           <PlayButton />
         </Overlay>

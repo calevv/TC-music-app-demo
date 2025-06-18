@@ -38,6 +38,3 @@ export const LibHead = () => {
     </Head>
   );
 };
-function useGetCurrentUserProfile(): { data: any } {
-  throw new Error("Function not implemented.");
-}
