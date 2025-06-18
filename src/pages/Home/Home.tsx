@@ -1,33 +1,38 @@
 import { Box } from "@mui/material";
-import NewRelease from "./components/NewRelease";
-import SearchItems from "./components/SearchItems";
+import { lazy, Suspense } from "react";
+import LoadingSpinner from "../../common/components/LoadingSpinner";
+
+const NewRelease = lazy(() => import("./components/NewRelease"));
+const SearchItems = lazy(() => import("./components/SearchItems"));
 
 function Home() {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        overflow: "hidden",
-      }}
-    >
+    <Suspense fallback={<LoadingSpinner />}>
       <Box
         sx={{
-          flex: 1,
-          overflow: "auto",
-          "&::-webkit-scrollbar": {
-            display: "none",
-            width: 0,
-            msOverflowStyle: "none", // IE and Edge
-            scrollbarWidth: "none", // Firefox
-          },
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          overflow: "hidden",
         }}
       >
-        <NewRelease />
-        <SearchItems />
+        <Box
+          sx={{
+            flex: 1,
+            overflow: "auto",
+            "&::-webkit-scrollbar": {
+              display: "none",
+              width: 0,
+              msOverflowStyle: "none", // IE and Edge
+              scrollbarWidth: "none", // Firefox
+            },
+          }}
+        >
+          <NewRelease />
+          <SearchItems />
+        </Box>
       </Box>
-    </Box>
+    </Suspense>
   );
 }
 
