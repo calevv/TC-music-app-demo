@@ -26,7 +26,6 @@ const PlaylistContainer = styled("div")(({ theme }) => ({
 const Library = () => {
   const { ref, inView } = useInView();
   const { isAuthenticated } = useAuthStore();
-  const { data: user, isLoading: isUserLoading } = useGetCurrentUsersProfile();
 
   const {
     data: playlistData,
@@ -37,8 +36,6 @@ const Library = () => {
     isFetchingNextPage,
   } = useGetCurrentUserPlaylist({
     limit: 10,
-    offset: 0,
-    enabled: !!user,
   });
 
   useEffect(() => {
@@ -47,24 +44,28 @@ const Library = () => {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  if (isUserLoading || isPlaylistLoading) {
+  if (isPlaylistLoading) {
     return <LoadingSpinner />;
+  }
+
+  if (!isAuthenticated) {
+    return <EmptyPlaylist />;
   }
 
   if (playlistError) {
     // 여기서 발생하는 에러는 로그인 후 플레이리스트를 가져오다가 발생한 에러
-    // return <ErrorMessage errorMessage={playlistError.message} />;
+    console.log(playlistError.message);
     return <EmptyPlaylist />;
   }
 
-  const hasPlaylists =
-    playlistData &&
-    playlistData.pages &&
-    playlistData.pages.some((page) => page.items.length > 0);
+  // const hasPlaylists =
+  //   playlistData &&
+  //   playlistData.pages &&
+  //   playlistData.pages.some((page) => page.items.length > 0);
 
-  if (!isAuthenticated || !user || !hasPlaylists) {
-    return <EmptyPlaylist />;
-  }
+  // if (!isAuthenticated || !user || !hasPlaylists) {
+  //   return <EmptyPlaylist />;
+  // }
 
   return (
     <PlaylistContainer>
