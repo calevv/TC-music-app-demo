@@ -16,9 +16,9 @@ const SearchPageBar = () => {
 
   useEffect(() => {
     if (keyword) {
-      navigate(`/search/${keyword}`);
+      navigate(`/search/${keyword}`, { replace: true });
     } else {
-      navigate(`/search`);
+      navigate(`/search`, { replace: true });
     }
   }, [keyword, navigate]);
 
